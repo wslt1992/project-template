@@ -1,5 +1,4 @@
-import './index.scss'
-
+import './style/index.scss'
 // function greeter (person) {
 //   return 'Hello, ' + person
 // }

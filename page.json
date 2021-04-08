@@ -1,0 +1,10 @@
+{
+  "index": {
+    "html": "./public/index.html",
+    "js": "./src/index.ts"
+  },
+  "about": {
+    "html": "./public/about.html",
+    "js": "./src/about.ts"
+  }
+}

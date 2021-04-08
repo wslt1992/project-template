@@ -1,24 +1,29 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const ESLintPlugin = require('eslint-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
 const StylelintPlugin = require('stylelint-webpack-plugin')
+
+const { entry, htmlPlugin } = require('./page')
 
 module.exports = {
   mode: 'development',
   // mode: 'production',
-  entry: './src/index.ts',
+  entry: { ...entry },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    filename: '[name].min.js'
+    filename: '[name].js',
+    clean: true
   },
   devtool: 'source-map',
   module: {
     rules: [
       {
+        test: /\.html$/i,
+        loader: 'html-loader'
+      },
+      {
         test: /\.ts$/,
         use: ['babel-loader', 'ts-loader'],
-        // use: ['babel-loader', 'ts-loader', 'eslint-loader'],
         exclude: /node_modules/
       },
       {
@@ -32,8 +37,15 @@ module.exports = {
           // 将 Sass 编译成 CSS
           'sass-loader'
         ]
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource'
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/i,
+        type: 'asset/resource'
       }
-
     ]
   },
   devServer: {
@@ -46,7 +58,7 @@ module.exports = {
   },
   plugins: [new MiniCssExtractPlugin(),
     new ESLintPlugin({ extensions: ['ts', 'js'], fix: false }),
-    new HtmlWebpackPlugin({ template: './index.html' }),
+    ...htmlPlugin,
     new StylelintPlugin({ fix: false })
   ]
 }

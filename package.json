@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "babel src --out-dir lib -w",
-    "start": "webpack serve"
+    "start": "webpack serve",
+    "build": "webpack build"
   },
   "author": "",
   "license": "ISC",
@@ -28,6 +29,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "eslint-webpack-plugin": "^2.5.3",
+    "html-loader": "^2.1.2",
     "html-webpack-plugin": "^5.3.1",
     "husky": "^6.0.0",
     "mini-css-extract-plugin": "^1.4.0",
