@@ -12,7 +12,11 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: '[name].js',
-    clean: true
+    clean: true,
+    library: {
+      name: 'webpackNumbers',
+      type: 'umd'
+    }
   },
   devtool: 'source-map',
   module: {
