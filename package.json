@@ -10,6 +10,20 @@
     "build": "webpack build",
     "prepare": "husky install"
   },
+  "lint-staged": {
+    "*.{js,ts,vue}": [
+      "eslint --fix"
+    ],
+    "*.scss": [
+      "stylelint --fix"
+    ],
+    "*.css": [
+      "stylelint --fix"
+    ],
+    "*.{json,md}": [
+      "prettier --write"
+    ]
+  },
   "author": "",
   "license": "ISC",
   "devDependencies": {
@@ -34,6 +48,7 @@
     "html-webpack-plugin": "^5.3.1",
     "husky": "^6.0.0",
     "mini-css-extract-plugin": "^1.4.0",
+    "prettier": "^2.2.1",
     "sass-loader": "^11.0.1",
     "style-loader": "^2.0.0",
     "stylelint": "^13.12.0",
