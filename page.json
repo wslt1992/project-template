@@ -1,7 +1,7 @@
 {
   "index": {
     "html": "./public/index.html",
-    "js": "./src/index.ts"
+    "js": "./index.ts"
   },
   "about": {
     "html": "./public/about.html",

@@ -5,6 +5,8 @@ const StylelintPlugin = require('stylelint-webpack-plugin')
 
 const { entry, htmlPlugin } = require('./page')
 
+const VueLoaderPlugin = require('vue-loader/lib/plugin-webpack5')
+
 module.exports = {
   mode: 'development',
   // mode: 'production',
@@ -22,19 +24,37 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader'
+      },
+      {
         test: /\.html$/i,
         loader: 'html-loader'
       },
       {
+        test: /\.js$/,
+        loader: 'babel-loader'
+      },
+      {
         test: /\.ts$/,
-        use: ['babel-loader', 'ts-loader'],
-        exclude: /node_modules/
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: { appendTsSuffixTo: [/\.vue$/] }
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          'vue-style-loader',
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           // 将 JS 字符串生成为 style 节点
-          MiniCssExtractPlugin.loader,
+          // MiniCssExtractPlugin.loader,
+          'vue-style-loader',
           // 'style-loader',
           // 将 CSS 转化成 CommonJS 模块
           'css-loader',
@@ -58,9 +78,11 @@ module.exports = {
     progress: true
   },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.ts', '.js', '.vue']
   },
-  plugins: [new MiniCssExtractPlugin(),
+  plugins: [
+    new VueLoaderPlugin(),
+    new MiniCssExtractPlugin(),
     new ESLintPlugin({ extensions: ['ts', 'js'], fix: false }),
     ...htmlPlugin,
     new StylelintPlugin({ fix: false })
